@@ -5,10 +5,11 @@ class Room(object):
 
     def occupiers_names(self):
         """Gives the list of current occupiers of a room"""
-        occupiers_list = [occupiers.name for occupier in self.occupiers]
+        occupiers_list = [occupiers.name for item in self.occupiers]
         return occupiers_list
 
-    def prepopulate(self):
+    def populate(self):
+        """Creates a list of room names"""
         roomname_list = []
         for i in self.list:
             roomname_list.append(i)
@@ -19,8 +20,9 @@ class Room(object):
         return len(self.occupiers)
 
     def available_space(self):
-        """Checks if room is at maximum capacity and returns true if full"""
-        if self.current_number() >= self.maximum_members():
+        """Checks if room is at maximum capacity"""
+        """returns true if space is available"""
+        if self.current_number() <= self.maximum_members():
             return True
         else:
             return False
