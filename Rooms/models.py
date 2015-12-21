@@ -1,16 +1,19 @@
+from Employees.model import Staff, Fellow
+
+
 class Room(object):
     def __init__(self, room_names):
         self.list = room_names
-        self.occupiers = []
+        self.occupants = []
 
-    def occupiers_names(self):
+    def occupant_names(self):
         """Gives the list of current occupiers of a room"""
-        occupiers = [occupier.name for occupier in self.occupiers]
-        return occupiers
+        occupants = [occupant.name for occupant in self.occupants]
+        return occupants
 
     def current_number(self):
         """checks for current occupancy of a room"""
-        return len(self.occupiers)
+        return len(self.occupants)
 
     def available_space(self):
         """Checks if room is at maximum capacity"""
@@ -23,9 +26,19 @@ class Room(object):
 
 class Office(Room):
     maximum_members = 6
-    room_type = 'office'
+
+    def add_occupant(self, employee):
+        "adds an employees name to list of office occupants"
+        if self.available_space is True:
+            if isinstance(employee, Staff) or isinstance(employee, Fellow):
+                self.occupants.append(employee)
+            return self.occupants
 
 
 class LivingSpace(Room):
     maximum_members = 4
-    room_type = 'living'
+
+    def add_occupant(self, Fellow):
+        if self.available_space is True:
+            self.accupants.append(Fellow)
+        return self.occupants
