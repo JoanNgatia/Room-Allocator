@@ -1,2 +1,2 @@
 # Room-Allocator
-System to allocate office and living spaces to staff and fellows at Amity
+System to allocate offices and living spaces to staff and fellows at Amity
