@@ -13,12 +13,13 @@ class Employee(object):
 class Fellow(Employee):
     """Fellow inherits from Employee class
        fellow has choice of housing within Amity"""
-    def __init__(self, name, choice_housing):
+    def __init__(self, name):
         self.name = name
         self.choice_housing = True
         self.living_space = None
 
-    def living_space(self, living_space):
+    def living_space(self, living_space, choice_housing):
+        self.choice_housing = True
         """assigns living space to fellow"""
         if self.choice_housing:
             self.living_space = living_space

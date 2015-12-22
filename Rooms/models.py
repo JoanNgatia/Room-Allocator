@@ -2,8 +2,8 @@ from Employees.model import Staff, Fellow
 
 
 class Room(object):
-    def __init__(self, room_names):
-        self.list = room_names
+    def __init__(self, room_name):
+        self.room_name = room_name
         self.occupants = []
 
     def occupant_names(self):
@@ -18,7 +18,7 @@ class Room(object):
     def available_space(self):
         """Checks if room is at maximum capacity"""
         """returns true if space is available"""
-        if self.current_number() < self.maximum_members():
+        if self.current_number() < self.maximum_members:
             return True
         else:
             return False
@@ -29,11 +29,13 @@ class Office(Room):
 
     def add_occupant(self, employee):
         "adds an employees name to list of office occupants"
-        if self.available_space is True:
+        if self.available_space() is True:
+            # import ipdb; ipdb.set_trace()
             if isinstance(employee, Staff) or isinstance(employee, Fellow):
                 self.occupants.append(employee)
+                with open('office_allocation.txt', 'a') as f:
+                    f.write(employee.name + " " + self.room_name + "\n")
             return self.occupants
-
 
 class LivingSpace(Room):
     maximum_members = 4
