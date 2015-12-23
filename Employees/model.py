@@ -15,18 +15,18 @@ class Fellow(Employee):
        fellow has choice of housing within Amity"""
     def __init__(self, name):
         self.name = name
-        self.choice_housing = True
         self.living_space = None
+        self.choice_housing = False
 
-    def living_space(self, living_space, choice_housing):
-        self.choice_housing = True
-        """assigns living space to fellow"""
-        if self.choice_housing:
-            self.living_space = living_space
-        else:
-            print "You did not choose to live within Amity"
+        def chooses_housing(self, choice_housing):
+            if choice_housing == 'Y' or choice_housing is True:
+                self.choice_housing = True
 
 
 class Staff(Employee):
     """staff inherits from the Employee class"""
     pass
+
+
+# class Emp_type:
+#     type_of = {'fellow': Fellow, 'staff': Staff}

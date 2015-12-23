@@ -30,17 +30,19 @@ class Office(Room):
     def add_occupant(self, employee):
         "adds an employees name to list of office occupants"
         if self.available_space() is True:
-            # import ipdb; ipdb.set_trace()
             if isinstance(employee, Staff) or isinstance(employee, Fellow):
                 self.occupants.append(employee)
                 with open('office_allocation.txt', 'a') as f:
                     f.write(employee.name + " " + self.room_name + "\n")
             return self.occupants
 
+
 class LivingSpace(Room):
     maximum_members = 4
 
-    def add_occupant(self, Fellow):
-        if self.available_space is True:
-            self.accupants.append(Fellow)
+    def add_occupant(self, fellow):
+        if self.available_space() is True:
+            self.occupants.append(fellow)
+            with open('rooms_allocated.txt', 'a') as f:
+                f.write(fellow.name + " " + self.room_name + "\n")
         return self.occupants
