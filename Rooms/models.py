@@ -26,6 +26,7 @@ class Room(object):
 
 class Office(Room):
     maximum_members = 6
+    room_type = "Office"
 
     def add_occupant(self, employee):
         "adds an employees name to list of office occupants"
@@ -39,8 +40,10 @@ class Office(Room):
 
 class LivingSpace(Room):
     maximum_members = 4
+    room_type = "LivingSpace"
 
     def add_occupant(self, fellow):
+        """add fellows name to list of livingspace occupants"""
         if self.available_space() is True:
             self.occupants.append(fellow)
             with open('rooms_allocated.txt', 'a') as f:

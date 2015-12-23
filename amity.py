@@ -2,18 +2,25 @@ from random import random
 from Employees.model import Staff, Fellow
 from Rooms.models import Office, LivingSpace
 
+living_space_names = ['Brown', 'Cyan', 'Turquiose', 'White',
+                      'Orange', 'Ruby', 'Lilac', 'Sapphire',
+                      'Emerald', 'Quartz']
+office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
+                'Springfield', 'Krypton', 'Oculus', 'Narnia',
+                'Gotham', 'Nowhere']
+
 
 class Amity(object):
 
     def __init__(self):
-        self.living_space_names = ['Brown', 'Cyan', 'Turquiose', 'White',
-                                   'Orange', 'Ruby', 'Lilac', 'Sapphire',
-                                   'Emerald', 'Quartz']
-        self.office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
-                             'Springfield', 'Krypton', 'Oculus', 'Narnia',
-                             'Gotham', 'Nowhere']
         self.fellows_list = []
         self.staff_list = []
+
+    def pre_populate_rooms(self, room_list, room_type):
+        if room_type.lower() == 'office':
+            room_list = [Office(room_name) for room_name in room_list]
+        elif room_type.lower() == 'livingspace':
+            room_list = [LivingSpace(room_name) for room_name in room_list]
 
     def get_employee_details(self):
         """filter employee details from input.txt file"""
@@ -90,7 +97,7 @@ class Amity(object):
         self.unallocated_fellows = []
 
         for fellow in self.fellows_list:
-            choice_housing = fellows[-1]
+            choice_housing = fellow[-1]
             if choice_housing == 'Y':
                 with open('roooms_allocated.txt', 'r') as f:
                     for line in f:
@@ -99,16 +106,16 @@ class Amity(object):
         print "These guys {} didn't get space".format(self.unallocated_fellows)
 
 
-amity = Amity()
-fellows = ['JOAN NGATIA', 'JEE GITHINJI', 'STANLEY NDAGI']
-amity.get_employee_details()
-fellows = amity.fellows_list
-staff = ['ANTHONY NANDAA']
-staff = amity.staff_list
-office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog']
-office_names = amity.office_names
-living_space_names = amity.living_space_names
-print amity.get_employee_details()
-print amity.assign_office_space(fellows, staff, office_names)
-print amity.assign_living_space(fellows, living_space_names)
-print amity.get_unallocated_fellows()
+# amity = Amity()
+# fellows = ['JOAN NGATIA', 'JEE GITHINJI', 'STANLEY NDAGI']
+# amity.get_employee_details()
+# fellows = amity.fellows_list
+# staff = ['ANTHONY NANDAA']
+# staff = amity.staff_list
+# office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog']
+# office_names = amity.office_names
+# living_space_names = amity.living_space_names
+# print amity.get_employee_details()
+# print amity.assign_office_space(fellows, staff, office_names)
+# print amity.assign_living_space(fellows, living_space_names)
+# print amity.get_unallocated_fellows()
