@@ -18,9 +18,13 @@ class Fellow(Employee):
         self.living_space = None
         self.choice_housing = False
 
-        def chooses_housing(self, choice_housing):
-            if choice_housing == 'Y' or choice_housing is True:
-                self.choice_housing = True
+    def chooses_housing(self, choice_housing):
+        if choice_housing == 'Y' or choice_housing is True:
+            self.choice_housing = True
+
+    def allocate_living_space(self, room):
+        self.living_space = room
+        return self.living_space
 
 
 class Staff(Employee):
