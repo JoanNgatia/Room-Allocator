@@ -1,6 +1,7 @@
 import unittest
-from Employees.model import Staff, Fellow
-from Rooms.models import Office, LivingSpace
+from employees.model import Staff, Fellow
+from rooms.models import Office, LivingSpace
+from amity import Amity
 
 
 class TestModels(unittest.TestCase):
@@ -21,7 +22,7 @@ class TestModels(unittest.TestCase):
 
 
 class TestAllocation(unittest.TestCase):
-    """test room allocation to employees"""
+    """Test room allocation to employees"""
     def test_office_alloaction(self):
         self.fellow = self.Employee('Joan Ngatia', 'fellow', choice_housing=True)
         self.staff = self.Employee('Anthony Nandaa', 'staff')
@@ -38,3 +39,18 @@ class TestAllocation(unittest.TestCase):
         self.assertIsNotNone(self.felllow.allocate_livingspace())
         self.assertFalse(office_name.available_space())
         self.assertFalse(living_name.available_space())
+
+    """Test getting the current occupants of a given room"""
+    def test_current_occupants(self):
+        self.amity = Amity()
+        office_name = Office('Gotham')
+        living_name = LivingSpace('Emerald')
+        self.staff.allocate_office(office_name)
+        self.fellow.allocate_livingspace(living_name)
+        office_guys = office_name.get_occupants()
+        living_guys = living_name.get_occupants()
+        self.assertIsNotNone(office_guys)
+        self.assertIsNotNone(living_guys)
+
+if __name__ == '__main__':
+    unittest.main()

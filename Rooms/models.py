@@ -6,10 +6,9 @@ class Room(object):
         self.room_name = room_name
         self.occupants = []
 
-    def occupant_names(self):
+    def get_occupants(self):
         """Gives the list of current occupiers of a room"""
-        occupants = [occupant.name for occupant in self.occupants]
-        return occupants
+        return self.occupants
 
     def current_number(self):
         """checks for current occupancy of a room"""

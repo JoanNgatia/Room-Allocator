@@ -1,6 +1,6 @@
 from random import random
-from Employees.model import Staff, Fellow
-from Rooms.models import Office, LivingSpace
+from employees.model import Employee, Staff, Fellow
+from rooms.models import Office, LivingSpace
 
 living_space_names = ['Brown', 'Cyan', 'Turquiose', 'White',
                       'Orange', 'Ruby', 'Lilac', 'Sapphire',
@@ -35,11 +35,19 @@ class Amity(object):
                 else:
                     self.staff_list.append(employee_name)
 
-        print self.fellows_list
-        print self.staff_list
-
-    def assign_office_space(self, fellows_list, staff_list, office_names):
+    def assign_office_space(self, office_names):
         length = len(office_names)
+
+        # for staff in self.staff_list:
+        #     for fellow in self.fellows_list:
+        #         if isinstance(Employee, Staff) or 
+                            # isinstance(Employee, Fellow):
+        #             office_index = int(random() * length)
+        #             office_assigned = office_names[office_index]
+        #             office = Office(office_assigned)
+        #             if office.available_space() is True:
+        #                 office.add_occupant(Employee)
+        #             return office_assigned
 
         """assign office to staff randomly"""
         for staff in self.staff_list:
@@ -49,7 +57,6 @@ class Amity(object):
             office = Office(office_assigned)
             if office.available_space() is True:
                 office.add_occupant(staff_member)
-                print office_assigned
 
         """assign office to fellows randomly"""
         for fellow in self.fellows_list:
@@ -59,9 +66,8 @@ class Amity(object):
             office = Office(office_assigned)
             if office.available_space() is True:
                 office.add_occupant(fellow_member)
-                print office_assigned
 
-    def assign_living_space(self, fellows, living_space_names):
+    def assign_living_space(self, living_space_names):
         length = len(living_space_names)
 
         """assign living space to fellows"""
@@ -74,7 +80,7 @@ class Amity(object):
                 living_space = LivingSpace(living_space_assigned)
                 if living_space.available_space() is True:
                     living_space.add_occupant(fellow_member)
-                print living_space_assigned
+        return living_space_assigned
 
     def get_unallocated_employees(self):
         """return employees that didn't get office space"""
@@ -91,7 +97,7 @@ class Amity(object):
                 for line in f:
                     if fellow not in line:
                         self.unallocated_employees.append(fellow)
-        print self.unallocated_employees
+        return self.unallocated_employees
 
     def get_unallocated_fellows(self):
         self.unallocated_fellows = []
@@ -99,23 +105,23 @@ class Amity(object):
         for fellow in self.fellows_list:
             choice_housing = fellow[-1]
             if choice_housing == 'Y':
-                with open('roooms_allocated.txt', 'r') as f:
+                with open('rooms_allocated.txt', 'r') as f:
                     for line in f:
                         if fellow not in line:
                             self.unallocated_fellows.append(fellow)
-        print "These guys {} didn't get space".format(self.unallocated_fellows)
+        return "These guys {} didn't get space".format(self.unallocated_fellows)
 
 
-# amity = Amity()
+amity = Amity()
 # fellows = ['JOAN NGATIA', 'JEE GITHINJI', 'STANLEY NDAGI']
-# amity.get_employee_details()
-# fellows = amity.fellows_list
+amity.get_employee_details()
+fellows = amity.fellows_list
 # staff = ['ANTHONY NANDAA']
-# staff = amity.staff_list
+staff = amity.staff_list
 # office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog']
 # office_names = amity.office_names
 # living_space_names = amity.living_space_names
 # print amity.get_employee_details()
-# print amity.assign_office_space(fellows, staff, office_names)
-# print amity.assign_living_space(fellows, living_space_names)
-# print amity.get_unallocated_fellows()
+amity.assign_office_space(office_names)
+# amity.assign_living_space(living_space_names)
+# print amity.get_unallocated_employees()
