@@ -60,7 +60,7 @@ class Amity(object):
 
         """assign office to fellows randomly"""
         for fellow in self.fellows_list:
-            fellow_member = Fellow(fellow)
+            fellow_member = Fellow(fellow, True)
             office_index = int(random() * length)
             office_assigned = office_names[office_index]
             office = Office(office_assigned)

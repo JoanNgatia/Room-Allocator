@@ -13,9 +13,10 @@ class Employee(object):
 class Fellow(Employee):
     """Fellow inherits from Employee class
        fellow has choice of housing within Amity"""
-    def __init__(self, name):
+    def __init__(self, name, choice_housing):
         self.name = name
         self.living_space = None
+        self.type = type
         self.choice_housing = False
 
     def chooses_housing(self, choice_housing):

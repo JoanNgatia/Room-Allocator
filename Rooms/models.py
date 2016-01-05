@@ -1,4 +1,4 @@
-from Employees.model import Staff, Fellow
+from employees.model import Staff, Fellow
 
 
 class Room(object):
