@@ -72,7 +72,7 @@ class Amity(object):
 
         """assign living space to fellows"""
         for fellow in self.fellows_list:
-            fellow_member = Fellow(fellow)
+            fellow_member = Fellow(fellow, True)
             choice_housing = fellow[-1]
             if choice_housing == 'Y':
                 living_space_index = int(random() * length)
@@ -122,6 +122,6 @@ staff = amity.staff_list
 # office_names = amity.office_names
 # living_space_names = amity.living_space_names
 # print amity.get_employee_details()
-amity.assign_office_space(office_names)
-# amity.assign_living_space(living_space_names)
+# amity.assign_office_space(office_names)
+amity.assign_living_space(living_space_names)
 # print amity.get_unallocated_employees()
