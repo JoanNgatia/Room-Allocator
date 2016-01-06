@@ -95,6 +95,7 @@ class Amity(object):
         return self.unallocated_employees
 
     def get_unallocated_fellows(self):
+        """return fellows that did not get a living space"""
         self.unallocated_fellows = []
 
         for fellow in self.fellows_list:
