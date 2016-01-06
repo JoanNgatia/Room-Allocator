@@ -1,4 +1,3 @@
-# import argparse
 import sys
 import fileinput
 from random import random
@@ -11,7 +10,11 @@ living_space_names = ['Brown', 'Cyan', 'Turquiose', 'White',
 office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
                 'Springfield', 'Krypton', 'Oculus', 'Narnia',
                 'Gotham', 'Nowhere']
-file = sys.argv[1]
+
+if len(sys.argv) > 1:
+    file = sys.argv[1]
+else:
+    print "Please add an input.txt file to read from."
 
 
 class Amity(object):
@@ -26,17 +29,8 @@ class Amity(object):
         elif room_type.lower() == 'livingspace':
             room_list = [LivingSpace(room_name) for room_name in room_list]
 
-    # def main(self):
-    #     """Read input file from command line"""
-    #     parser = argparse.ArgumentParser()
-    #     parser.add_argument('infile', type='open')
-    #     args = parser.parse_args()
-    #     self.inputfile = args.inputfile
-
     def get_employee_details(self, file):
         """filter employee details from input.txt file"""
-        # with open(self.inputfile, 'r') as f:
-        # for line in f:
         for line in fileinput.input(sys.argv[1]):
                 line = line.split()
                 employee_name = " ".join(line[:2])
@@ -111,12 +105,3 @@ class Amity(object):
                         if fellow not in line:
                             self.unallocated_fellows.append(fellow)
         return "These guys {} didn't get space".format(self.unallocated_fellows)
-
-# if __name__ == '__main__':
-#     amity = Amity()
-#     amity.get_employee_details()
-#     # fellows = amity.fellows_list
-#     # staff = amity.staff_list
-#     amity.assign_office_space(office_names)
-#     amity.assign_living_space(living_space_names)
-#     amity.get_unallocated_employees()

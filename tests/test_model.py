@@ -1,6 +1,12 @@
 import unittest
-from amity import Amity
-from employees.model import Employee, Staff, Fellow
+import nose
+# import sys
+# sys.path.append('''\Room-Allocator''')
+
+from main.amity import Amity
+# from main import Amity # Amity class to be tested
+# from manage.py import Amity
+from employees.model import Staff, Fellow
 from rooms.models import Office, LivingSpace
 
 
@@ -55,4 +61,4 @@ class TestAllocation(unittest.TestCase):
         self.assertIsNotNone(living_guys)
 
 if __name__ == '__main__':
-    unittest.main()
+    nose.run()
