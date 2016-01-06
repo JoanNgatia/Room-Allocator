@@ -8,8 +8,17 @@ python:
   - "3.5-dev" # 3.5 development branch
 
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install:
+  - "pip install --upgrade pip"
+  - "pip install python-coveralls"
+  - "pip install coverage"
+  - "pip install -r requirements.txt"
 
+virtualenv:
+    system_site_packages: true
+
+before_install:
+  SITE_PKG_DIR=$VIRTUAL_ENV/lib/python$TRAVIS_PYTHON_VERSION/site-packages rm -f $VIRTUAL_ENV/lib/python$TRAVIS_PYTHON_VERSION/no-global-site-packages.txt  
 # command to run tests
 script: 
   - nosetests --with-coverage
