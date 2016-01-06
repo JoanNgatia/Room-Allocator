@@ -4,3 +4,6 @@
 #Sys generated files
 *office_allocation.txt
 *rooms_allocated.txt
+
+*.coverage
+*htmlcov/
