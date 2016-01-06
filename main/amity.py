@@ -14,7 +14,7 @@ office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
 if len(sys.argv) > 1:
     file = sys.argv[1]
 else:
-    print "Please add an input.txt file to read from."
+    print "Please add an input.txt file to read from"
 
 
 class Amity(object):

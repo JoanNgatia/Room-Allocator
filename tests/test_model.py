@@ -1,11 +1,14 @@
 import unittest
 import nose
-# import sys
-# sys.path.append('''\Room-Allocator''')
+import os
+import sys
+import inspect
+currentdir = os.path.dirname(os.path.abspath(
+    inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir)
 
 from main.amity import Amity
-# from main import Amity # Amity class to be tested
-# from manage.py import Amity
 from employees.model import Staff, Fellow
 from rooms.models import Office, LivingSpace
 
