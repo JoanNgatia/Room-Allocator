@@ -1,2 +1,6 @@
 #Byte-compiled files
 *.pyc
+
+#Sys generated files
+*office_allocation.txt
+*rooms_allocated.txt
