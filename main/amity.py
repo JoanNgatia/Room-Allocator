@@ -28,6 +28,7 @@ class Amity(object):
             room_list = [Office(room_name) for room_name in room_list]
         elif room_type.lower() == 'livingspace':
             room_list = [LivingSpace(room_name) for room_name in room_list]
+        return room_list
 
     def get_employee_details(self, file):
         """filter employee details from input.txt file"""

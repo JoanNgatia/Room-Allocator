@@ -12,6 +12,13 @@ from main.amity import Amity
 from employees.model import Staff, Fellow
 from rooms.models import Office, LivingSpace
 
+living_space_names = ['Brown', 'Cyan', 'Turquiose', 'White',
+                      'Orange', 'Ruby', 'Lilac', 'Sapphire',
+                      'Emerald', 'Quartz']
+office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
+                'Springfield', 'Krypton', 'Oculus', 'Narnia',
+                'Gotham', 'Nowhere']
+
 
 class TestModels(unittest.TestCase):
     def setup(self):
@@ -28,6 +35,12 @@ class TestModels(unittest.TestCase):
         livingspace_size = self.livingspace.maximum_members
         self.assertEqual(office_size, 6)
         self.assertEqual(livingspace_size, 4)
+
+    def test_current_room_size(self):
+        self.office = Office('Roundtable')
+        self.livingspace = LivingSpace('Sapphire')
+        self.assertLessEqual(self.office.current_number(), 6)
+        self.assertLessEqual(self.livingspace.current_number(), 4)
 
 
 class TestAllocation(unittest.TestCase):
