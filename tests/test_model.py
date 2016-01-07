@@ -32,7 +32,9 @@ class TestModels(unittest.TestCase):
 
 class TestAllocation(unittest.TestCase):
     """Test room allocation to employees"""
+
     def test_office_allocation(self):
+        """Test office allocation to employees"""
         self.fellow = Fellow('Joan Ngatia', True)
         self.staff = Staff('Anthony Nandaa')
         office_name = Office('Gotham')
@@ -49,8 +51,8 @@ class TestAllocation(unittest.TestCase):
         self.assertTrue(office_name.available_space())
         self.assertTrue(living_name.available_space())
 
-    """Test getting the current occupants of a given room"""
     def test_current_occupants(self):
+        """Test getting the current occupants of a given room"""
         self.amity = Amity()
         self.fellow = Fellow('Joan Ngatia', True)
         self.staff = Staff('Anthony Nandaa')
@@ -62,6 +64,14 @@ class TestAllocation(unittest.TestCase):
         living_guys = living_name.get_occupants()
         self.assertIsNotNone(office_guys)
         self.assertIsNotNone(living_guys)
+
+    def test_unallocated(self):
+        """Test number of unallocated employees if any"""
+        self.amity = Amity()
+        unallocated_employees = self.amity.get_unallocated_employees()
+        unallocated_fellows = self.amity.get_unallocated_fellows()
+        self.assertGreaterEqual(len(unallocated_employees), 0)
+        self.assertGreaterEqual(len(unallocated_fellows), 0)
 
 if __name__ == '__main__':
     nose.run()
