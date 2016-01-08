@@ -34,7 +34,7 @@ class Amity(object):
             else:
                 self.staff_list.append(Staff(employee_name))
 
-    def assign_office_space(self):
+    def assign_officespace(self):
         # length = len(office_names)
         shuffle(self.room_list['office'])
 
@@ -43,9 +43,10 @@ class Amity(object):
         shuffle(employee_list)
         employee_pos = 0
         # for employee in employee_list:
-        while employee_pos < len(employee_list):
+        if employee_pos < len(employee_list):
             for employee in employee_list:
                 office_list = self.room_list['office']
+                # print office_list
                 length = len(office_list)
                 office_allocated_index = int(random() * length)
                 office_allocated = office_list[office_allocated_index]
@@ -60,24 +61,28 @@ class Amity(object):
 
             employee_pos += 1
 
-    def assign_living_space(self, living_space_names):
+    def assign_livingspace(self):
         shuffle(self.room_list['livingspace'])
+        # print self.room_list
+        livingspace_list = self.room_list['livingspace']
+        length = len(livingspace_list)
 
-        length = len(living_space_names)
-
-        """assign living space to fellows"""
         shuffle(self.fellows_list)
-        for fellow in self.fellows_list:
+        fellow_pos = 0
+        """assign living space to fellows"""
+        if fellow_pos < len(self.fellows_list):
+            for fellow in self.fellows_list:
+                if fellow.wants_housing:
+                    livingspace_allocated_index = int(random() * length)
+                    livingspace_allocated = livingspace_list[livingspace_allocated_index]
 
-            fellow_member = Fellow(fellow, True)
-            choice_housing = fellow[-1]
-            if choice_housing == 'Y':
-                living_space_index = int(random() * length)
-                living_space_assigned = living_space_names[living_space_index]
-                living_space = LivingSpace(living_space_assigned)
-                if living_space.available_space() is True:
-                    living_space.add_occupant(fellow_member)
-        return living_space_assigned
+                    if livingspace_allocated.available_space() is True:
+                        fellow.allocate_livingspace(livingspace_allocated)
+                        livingspace_allocated.add_roomie(fellow)
+                        self.allocated.append(livingspace_allocated)
+                        livingspace_allocated_index += 1
+                    else:
+                        self.unallocated.append(fellow)
 
     def get_allocations_list(self):
         """return a list of allocated employees"""
