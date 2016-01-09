@@ -8,7 +8,7 @@ class Room(object):
 
     def get_occupants(self):
         """Gives the list of current occupiers of a room"""
-        return self.occupants
+        print self.occupants
 
     def current_number(self):
         """checks for current occupancy of a room"""
@@ -19,10 +19,6 @@ class Room(object):
         """returns true if space is available"""
         if self.current_number() < self.maximum_members:
             return True
-        else:
-            return False
-
-   
 
 
 class Office(Room):
@@ -46,7 +42,7 @@ class LivingSpace(Room):
     maximum_members = 4
     room_type = "LivingSpace"
 
-    def add_occupant(self, fellow):
+    def add_roomie(self, fellow):
         """add fellows name to list of livingspace occupants"""
         if self.available_space() is True:
             self.occupants.append(fellow)

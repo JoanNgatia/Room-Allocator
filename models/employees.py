@@ -21,7 +21,7 @@ class Fellow(Employee):
         self.living_space = None
         self.wants_housing = True if wants_housing == 'Y' else False
 
-    def allocate_living_space(self, room):
+    def allocate_livingspace(self, room):
         self.living_space = room
         return self.living_space
 
