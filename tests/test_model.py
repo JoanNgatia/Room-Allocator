@@ -9,15 +9,8 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0, parentdir)
 
 from main.amity import Amity
-from employees.model import Staff, Fellow
-from rooms.models import Office, LivingSpace
-
-living_space_names = ['Brown', 'Cyan', 'Turquiose', 'White',
-                      'Orange', 'Ruby', 'Lilac', 'Sapphire',
-                      'Emerald', 'Quartz']
-office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
-                'Springfield', 'Krypton', 'Oculus', 'Narnia',
-                'Gotham', 'Nowhere']
+from models.employees import Staff, Fellow
+from models.rooms import Office, LivingSpace
 
 
 class TestModels(unittest.TestCase):
@@ -53,14 +46,14 @@ class TestAllocation(unittest.TestCase):
         office_name = Office('Gotham')
         living_name = LivingSpace('Emerald')
         office_allocation = self.staff.allocate_office(office_name)
-        living_allocation = self.fellow.allocate_living_space(living_name)
+        living_allocation = self.fellow.allocate_livingspace(living_name)
         office_name.add_occupant(self.staff)
-        living_name.add_occupant(self.fellow)
+        living_name.add_roomie(self.fellow)
 
         self.assertIsInstance(office_allocation, Office)
         self.assertIsInstance(living_allocation, LivingSpace)
         self.assertIsNotNone(self.staff.allocate_office(Office))
-        self.assertIsNotNone(self.fellow.allocate_living_space(LivingSpace))
+        self.assertIsNotNone(self.fellow.allocate_livingspace(LivingSpace))
         self.assertTrue(office_name.available_space())
         self.assertTrue(living_name.available_space())
 
@@ -72,7 +65,7 @@ class TestAllocation(unittest.TestCase):
         office_name = Office('Gotham')
         living_name = LivingSpace('Emerald')
         self.staff.allocate_office(office_name)
-        self.fellow.allocate_living_space(living_name)
+        self.fellow.allocate_livingspace(living_name)
         office_guys = office_name.get_occupants()
         living_guys = living_name.get_occupants()
         self.assertIsNotNone(office_guys)
@@ -81,10 +74,8 @@ class TestAllocation(unittest.TestCase):
     def test_unallocated(self):
         """Test number of unallocated employees if any"""
         self.amity = Amity()
-        unallocated_employees = self.amity.get_unallocated_employees()
-        unallocated_fellows = self.amity.get_unallocated_fellows()
+        unallocated_employees = self.amity.get_unallocated()
         self.assertGreaterEqual(len(unallocated_employees), 0)
-        self.assertGreaterEqual(len(unallocated_fellows), 0)
 
 if __name__ == '__main__':
     nose.run()
