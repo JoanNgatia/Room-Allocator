@@ -68,7 +68,7 @@ class TestAllocation(unittest.TestCase):
         self.fellow.allocate_livingspace(living_name)
         office_guys = office_name.get_occupants()
         living_guys = living_name.get_occupants()
-        self.assertIsNotNone(office_guys)
+        self.assertIcoveragesNotNone(office_guys)
         self.assertIsNotNone(living_guys)
 
     def test_unallocated(self):
