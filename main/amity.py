@@ -2,7 +2,7 @@ import sys
 import fileinput
 from random import random, shuffle
 from models.employees import Staff, Fellow
-from models.rooms import Room, Office, LivingSpace
+from models.rooms import Office, LivingSpace
 
 
 class Amity(object):
@@ -23,6 +23,7 @@ class Amity(object):
         self.livingspace_index = 0
 
     def pre_populate_rooms(self, room_list, room_type):
+        """prepopulates amity with offices and livingspaces"""
         for room_name in room_list:
             room = Office(room_name) if room_type.lower() == 'office' else LivingSpace(room_name)
             self.room_list[room_type.lower()].append(room)
@@ -56,7 +57,6 @@ class Amity(object):
         return livingspace
 
     def assign_officespace(self):
-
         """assign office to staff randomly"""
         employee_list = self.fellows_list + self.staff_list
         shuffle(employee_list)
@@ -67,7 +67,7 @@ class Amity(object):
                 office.add_occupant(employee)
                 self.allocated['office'].append(office)
             else:
-                self.unallocated.append(employee) 
+                self.unallocated.append(employee)
 
     def assign_livingspace(self):
         """assign livingspace to fellows that want housing"""
@@ -81,18 +81,18 @@ class Amity(object):
                     livingspace.add_roomie(fellow)
                     self.allocated['livingspace'].append(livingspace)
                 else:
-                    print self.unallocated.append(fellow)
+                    self.unallocated.append(fellow)
 
     def get_allocations_list(self):
         """return a list of allocated employees"""
-        return self.allocated
+        print self.allocated
 
     def print_allocations(self):
         """print a list of allocations"""
-        for room in self.allocated:
-            print "%s (%s)" % (room.room_name, room.room_type)
-            for occupant in room.occupants:
-                print occupant.name + " ",
+        for key in self.allocated:
+            for value in self.allocated[key]:
+                print value.room_name, "({})".format(value.room_type.upper())
+                print value.get_occupants(),
             print "\n"
 
     def get_unallocated(self):

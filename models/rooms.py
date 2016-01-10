@@ -34,7 +34,7 @@ class Office(Room):
                 self.occupants.append(employee)
                 with open('office_allocation.txt', 'a') as f:
                     f.write(employee.name + " " + self.room_name + "\n")
-            return self.occupants
+        return self.occupants
 
     def __repr__(self):
         return "{0} (Office)".format(self.room_name)
@@ -51,3 +51,6 @@ class LivingSpace(Room):
             with open('rooms_allocated.txt', 'a') as f:
                 f.write(fellow.name + " " + self.room_name + "\n")
         return self.occupants
+
+    def __repr__(self):
+        return "{0} (Office)".format(self.room_name)

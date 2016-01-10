@@ -11,7 +11,6 @@ office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
 
 if __name__ == '__main__':
     amity = Amity()
-
 """Ensure that there is a file specified"""
 if len(sys.argv) > 1:
 	file_name = sys.argv[1]
@@ -34,5 +33,6 @@ if file_name:
 
     """return a list of unallocated persons"""
     amity.get_unallocated()
+
 else:
 	print "Please add an input.txt file to read from"
