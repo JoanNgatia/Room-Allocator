@@ -53,4 +53,4 @@ class LivingSpace(Room):
         return self.occupants
 
     def __repr__(self):
-        return "{0} (Office)".format(self.room_name)
+        return "{0} (LivingSpace)".format(self.room_name)

@@ -25,12 +25,13 @@ class Amity(object):
     def pre_populate_rooms(self, room_list, room_type):
         """prepopulates amity with offices and livingspaces"""
         for room_name in room_list:
-            room = Office(room_name) if room_type.lower() == 'office' else LivingSpace(room_name)
+            room = Office(room_name) \
+                if room_type.lower() == 'office' else LivingSpace(room_name)
             self.room_list[room_type.lower()].append(room)
 
-    def get_employee_details(self, file):
+    def get_employee_details(self, inputfile):
         """filter employee details from input.txt file"""
-        for line in fileinput.input(file):
+        for line in fileinput.input(inputfile):
             line = line.split()
             employee_name = " ".join(line[:2])
             employee_type = line[2]
@@ -39,6 +40,7 @@ class Amity(object):
                 self.fellows_list.append(Fellow(employee_name, wants_housing))
             else:
                 self.staff_list.append(Staff(employee_name))
+        return self.fellows_list + self.staff_list
 
     def get_office(self):
         """returns available office"""
@@ -58,9 +60,9 @@ class Amity(object):
             self.allocated['livingspace'].append(livingspace)
         return livingspace
 
-    def assign_officespace(self, office):
+    def assign_officespace(self, employeefile):
         """assign office to employees randomly"""
-        employees = self.fellows_list + self.staff_list
+        employees = self.get_employee_details(employeefile)
         shuffle(employees)
         for employee in employees:
             office = self.get_office()
@@ -70,8 +72,9 @@ class Amity(object):
             else:
                 self.unallocated.append(employee)
 
-    def assign_livingspace(self, livingspace):
+    def assign_livingspace(self, employeefile):
         """assign livingspace to fellows that want housing"""
+        self.get_employee_details(employeefile)
         fellows = self.fellows_list
         shuffle(fellows)
         for fellow in fellows:
@@ -89,11 +92,12 @@ class Amity(object):
 
     def print_allocations(self):
         """print a list of allocations"""
-        for key in self.allocated:
-            for value in self.allocated[key]:
-                print value.room_name, "({})".format(value.room_type.upper())
-                print value.get_occupants(),
-            print "\n"
+        for key, value in self.allocated.iteritems():
+            for room_name in value:
+                print "{0}" .format(room_name)
+                print room_name.get_occupants()
+                print
+        return True
 
     def get_unallocated(self):
         """return a list of unallocated employees"""

@@ -19,6 +19,8 @@ office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
                 'Springfield', 'Krypton', 'Oculus', 'Narnia',
                 'Gotham', 'Nowhere']
 
+file_input = 'input.txt'
+
 
 class TestModels(unittest.TestCase):
     """Test models created"""
@@ -65,9 +67,29 @@ class TestRoomAllocation(unittest.TestCase):
         self.assertEquals(len(self.amity.room_list['livingspace']), 10)
         self.assertEquals(len(self.amity.room_list['office']), 10)
 
-    def raise_system_error(self):
-        """Test system error if no input file is passed"""
-        
+    def test_employee_details_input(self):
+        """Test parsing input file"""
+        employees = self.amity.get_employee_details(file_input)
+        self.assertEquals(len(employees), 49)
+
+    def test_allocations_list(self):
+        """Test getting allocations list"""
+        self.amity.assign_officespace(file_input)
+        self.amity.assign_livingspace(file_input)
+        allocations = self.amity.get_allocations_list()
+        print_allocations = self.amity.print_allocations()
+        self.assertIsNotNone(allocations)
+        self.assertTrue(print_allocations)
+
+    def test_unallocated_list(self):
+        """Tests getting list of unallocated employees"""
+        self.amity.assign_officespace(file_input)
+        self.amity.assign_livingspace(file_input)
+        unallocated = self.amity.get_unallocated()
+        print_unallocated = self.amity.print_unallocated_employees()
+        self.assertIsNotNone(unallocated)
+        self.assertFalse(print_unallocated)
+
 
 if __name__ == '__main__':
     nose.run()

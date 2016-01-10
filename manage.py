@@ -16,22 +16,22 @@ if len(sys.argv) > 1:
 	file_name = sys.argv[1]
 
 if file_name:
-    """Prepopulate rooms and offices"""
+    # Prepopulate rooms and offices
     amity.pre_populate_rooms(office_names, 'office')
     amity.pre_populate_rooms(living_space_names, 'livingspace')
 
-    """Parse the file to get fellows and staff details"""
-    amity.get_employee_details(file_name)
+    # Parse the file to get fellows and staff details
+    # amity.get_employee_details(file_name)
 
-    """randomly allocate room space to employees"""
-    amity.assign_officespace(office_names)
-    amity.assign_livingspace(living_space_names)
+    # randomly allocate room space to employees
+    amity.assign_officespace(file_name)
+    amity.assign_livingspace(file_name)
 
-    """return list of allocations and print them out"""
+    # return list of allocations and print them out
     amity.get_allocations_list()
     amity.print_allocations()
 
-    """return a list of unallocated persons"""
+    # return a list of unallocated persons
     amity.get_unallocated()
     amity.print_unallocated_employees()
 
