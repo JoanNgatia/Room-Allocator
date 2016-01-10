@@ -1,14 +1,16 @@
-from employees.model import Staff, Fellow
+from employees import Staff, Fellow
 
 
 class Room(object):
+    maximum_members = 0
+
     def __init__(self, room_name):
         self.room_name = room_name
         self.occupants = []
 
     def get_occupants(self):
         """Gives the list of current occupiers of a room"""
-        return self.occupants
+        print self.occupants
 
     def current_number(self):
         """checks for current occupancy of a room"""
@@ -19,8 +21,6 @@ class Room(object):
         """returns true if space is available"""
         if self.current_number() < self.maximum_members:
             return True
-        else:
-            return False
 
 
 class Office(Room):
@@ -34,17 +34,23 @@ class Office(Room):
                 self.occupants.append(employee)
                 with open('office_allocation.txt', 'a') as f:
                     f.write(employee.name + " " + self.room_name + "\n")
-            return self.occupants
+        return self.occupants
+
+    def __repr__(self):
+        return "{0} (Office)".format(self.room_name)
 
 
 class LivingSpace(Room):
     maximum_members = 4
     room_type = "LivingSpace"
 
-    def add_occupant(self, fellow):
+    def add_roomie(self, fellow):
         """add fellows name to list of livingspace occupants"""
         if self.available_space() is True:
             self.occupants.append(fellow)
             with open('rooms_allocated.txt', 'a') as f:
                 f.write(fellow.name + " " + self.room_name + "\n")
         return self.occupants
+
+    def __repr__(self):
+        return "{0} (LivingSpace)".format(self.room_name)

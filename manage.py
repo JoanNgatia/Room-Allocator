@@ -1,4 +1,5 @@
-# runs the main allocation program
+"""runs the main allocation program"""
+import sys
 from main.amity import Amity
 
 living_space_names = ['Brown', 'Cyan', 'Turquiose', 'White',
@@ -10,8 +11,29 @@ office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
 
 if __name__ == '__main__':
     amity = Amity()
-    amity.pre_populate_rooms(living_space_names,'living')
-    amity.get_employee_details(file)
-    amity.assign_office_space(office_names)
-    amity.assign_living_space(living_space_names)
-    amity.get_unallocated_employees()
+"""Ensure that there is a file specified"""
+if len(sys.argv) > 1:
+	file_name = sys.argv[1]
+
+if file_name:
+    # Prepopulate rooms and offices
+    amity.pre_populate_rooms(office_names, 'office')
+    amity.pre_populate_rooms(living_space_names, 'livingspace')
+
+    # Parse the file to get fellows and staff details
+    # amity.get_employee_details(file_name)
+
+    # randomly allocate room space to employees
+    amity.assign_officespace(file_name)
+    amity.assign_livingspace(file_name)
+
+    # return list of allocations and print them out
+    amity.get_allocations_list()
+    amity.print_allocations()
+
+    # return a list of unallocated persons
+    amity.get_unallocated()
+    amity.print_unallocated_employees()
+
+else:
+	print "Please add an input.txt file to read from"
