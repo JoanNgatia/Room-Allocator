@@ -2,6 +2,8 @@ from employees import Staff, Fellow
 
 
 class Room(object):
+    maximum_members = 0
+
     def __init__(self, room_name):
         self.room_name = room_name
         self.occupants = []
@@ -35,7 +37,7 @@ class Office(Room):
             return self.occupants
 
     def __repr__(self):
-        return "{0} (Office)".format(self.room_name)        
+        return "{0} (Office)".format(self.room_name)
 
 
 class LivingSpace(Room):

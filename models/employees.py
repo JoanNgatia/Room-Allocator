@@ -10,7 +10,7 @@ class Employee(object):
         return self.office
 
     def __repr__(self):
-        return "{0}".format(self.name)        
+        return "{0}".format(self.name)
 
 
 class Fellow(Employee):
@@ -18,12 +18,13 @@ class Fellow(Employee):
        fellow has choice of housing within Amity"""
     def __init__(self, name, wants_housing='N'):
         self.name = name
-        self.living_space = None
+        self.livingspace = None
         self.wants_housing = True if wants_housing == 'Y' else False
 
     def allocate_livingspace(self, room):
-        self.living_space = room
-        return self.living_space
+        """Assign living space to fellows"""
+        self.livingspace = room
+        return self.livingspace
 
 
 class Staff(Employee):
