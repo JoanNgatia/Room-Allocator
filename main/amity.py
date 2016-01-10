@@ -40,8 +40,8 @@ class Amity(object):
             else:
                 self.staff_list.append(Staff(employee_name))
 
-    def get_next_office(self):
-        """returns next available office"""
+    def get_office(self):
+        """returns available office"""
         office = self.room_list['office'][self.office_index]
         if not office.available_space():
             self.office_index += 1
@@ -58,19 +58,19 @@ class Amity(object):
             self.allocated['livingspace'].append(livingspace)
         return livingspace
 
-    def assign_officespace(self):
-        """assign office to staff randomly"""
-        employee_list = self.fellows_list + self.staff_list
-        shuffle(employee_list)
-        for employee in employee_list:
-            office = self.get_next_office()
+    def assign_officespace(self, office):
+        """assign office to employees randomly"""
+        employees = self.fellows_list + self.staff_list
+        shuffle(employees)
+        for employee in employees:
+            office = self.get_office()
             if office is not None:
                 employee.allocate_office(office)
                 office.add_occupant(employee)
             else:
                 self.unallocated.append(employee)
 
-    def assign_livingspace(self):
+    def assign_livingspace(self, livingspace):
         """assign livingspace to fellows that want housing"""
         fellows = self.fellows_list
         shuffle(fellows)

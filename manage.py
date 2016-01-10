@@ -24,8 +24,8 @@ if file_name:
     amity.get_employee_details(file_name)
 
     """randomly allocate room space to employees"""
-    amity.assign_officespace()
-    amity.assign_livingspace()
+    amity.assign_officespace(office_names)
+    amity.assign_livingspace(living_space_names)
 
     """return list of allocations and print them out"""
     amity.get_allocations_list()
