@@ -33,6 +33,7 @@ if file_name:
 
     """return a list of unallocated persons"""
     amity.get_unallocated()
+    amity.print_unallocated_employees()
 
 else:
 	print "Please add an input.txt file to read from"

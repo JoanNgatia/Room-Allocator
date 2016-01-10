@@ -46,6 +46,7 @@ class Amity(object):
         if not office.available_space():
             self.office_index += 1
             office = self.room_list['office'][self.office_index]
+            self.allocated['office'].append(office)
         return office
 
     def get_livingspace(self):
@@ -54,6 +55,7 @@ class Amity(object):
         if not livingspace.available_space():
             self.livingspace_index += 1
             livingspace = self.room_list['livingspace'][self.livingspace_index]
+            self.allocated['livingspace'].append(livingspace)
         return livingspace
 
     def assign_officespace(self):
@@ -65,7 +67,6 @@ class Amity(object):
             if office is not None:
                 employee.allocate_office(office)
                 office.add_occupant(employee)
-                self.allocated['office'].append(office)
             else:
                 self.unallocated.append(employee)
 
@@ -79,13 +80,12 @@ class Amity(object):
                 if livingspace is not None:
                     fellow.allocate_livingspace(livingspace)
                     livingspace.add_roomie(fellow)
-                    self.allocated['livingspace'].append(livingspace)
                 else:
                     self.unallocated.append(fellow)
 
     def get_allocations_list(self):
         """return a list of allocated employees"""
-        print self.allocated
+        return self.allocated
 
     def print_allocations(self):
         """print a list of allocations"""
@@ -98,3 +98,8 @@ class Amity(object):
     def get_unallocated(self):
         """return a list of unallocated employees"""
         return self.unallocated
+
+    def print_unallocated_employees(self):
+        """print a list of employees that did not get space"""
+        for employee in self.unallocated:
+            print employee.name
