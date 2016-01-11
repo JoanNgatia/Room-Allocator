@@ -1,11 +1,11 @@
 class Employee(object):
-    """this class represents employee at amity"""
+    """Represents employees at amity"""
     def __init__(self, name):
         self.name = name
         self.office = None
 
     def allocate_office(self, office):
-        """assign office to employee"""
+        """Assign office to employee"""
         self.office = office
         return self.office
 
@@ -28,5 +28,5 @@ class Fellow(Employee):
 
 
 class Staff(Employee):
-    """staff inherits from the Employee class"""
+    """Staff inherits from the Employee class"""
     pass

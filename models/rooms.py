@@ -13,7 +13,7 @@ class Room(object):
         print self.occupants
 
     def current_number(self):
-        """checks for current occupancy of a room"""
+        """Checks for current occupancy of a room"""
         return len(self.occupants)
 
     def available_space(self):
@@ -28,12 +28,12 @@ class Office(Room):
     room_type = "Office"
 
     def add_occupant(self, employee):
-        "adds an employees name to list of office occupants"
+        "Adds an employees name to list of office occupants"
         if self.available_space() is True:
             if isinstance(employee, Staff) or isinstance(employee, Fellow):
                 self.occupants.append(employee)
                 with open('office_allocation.txt', 'a') as f:
-                    f.write(employee.name + " " + self.room_name + "\n")
+                    f.write(self.room_name + " " + employee.name + "\n")
         return self.occupants
 
     def __repr__(self):
@@ -45,11 +45,11 @@ class LivingSpace(Room):
     room_type = "LivingSpace"
 
     def add_roomie(self, fellow):
-        """add fellows name to list of livingspace occupants"""
+        """Add fellows name to list of livingspace occupants"""
         if self.available_space() is True:
             self.occupants.append(fellow)
-            with open('rooms_allocated.txt', 'a') as f:
-                f.write(fellow.name + " " + self.room_name + "\n")
+            with open('livingrooms_allocation.txt', 'a') as f:
+                f.write(self.room_name + " " + fellow.name + "\n")
         return self.occupants
 
     def __repr__(self):

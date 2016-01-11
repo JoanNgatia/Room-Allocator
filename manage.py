@@ -21,15 +21,20 @@ if file_name:
     amity.pre_populate_rooms(living_space_names, 'livingspace')
 
     # Parse the file to get fellows and staff details
-    # amity.get_employee_details(file_name)
+    amity.get_employee_details(file_name)
 
     # randomly allocate room space to employees
-    amity.assign_officespace(file_name)
-    amity.assign_livingspace(file_name)
+    amity.assign_officespace()
+    amity.assign_livingspace()
 
     # return list of allocations and print them out
     amity.get_allocations_list()
     amity.print_allocations()
+
+    # return list of members of a given room
+    # allocation_result = amity.get_allocations_list()
+    # print allocation_result['office'][1]
+    # print allocation_result['office'][1].get_occupants()
 
     # return a list of unallocated persons
     amity.get_unallocated()

@@ -74,8 +74,8 @@ class TestRoomAllocation(unittest.TestCase):
 
     def test_allocations_list(self):
         """Test getting allocations list"""
-        self.amity.assign_officespace(file_input)
-        self.amity.assign_livingspace(file_input)
+        self.amity.assign_officespace()
+        self.amity.assign_livingspace()
         allocations = self.amity.get_allocations_list()
         print_allocations = self.amity.print_allocations()
         self.assertIsNotNone(allocations)
@@ -83,8 +83,8 @@ class TestRoomAllocation(unittest.TestCase):
 
     def test_unallocated_list(self):
         """Tests getting list of unallocated employees"""
-        self.amity.assign_officespace(file_input)
-        self.amity.assign_livingspace(file_input)
+        self.amity.assign_officespace()
+        self.amity.assign_livingspace()
         unallocated = self.amity.get_unallocated()
         print_unallocated = self.amity.print_unallocated_employees()
         self.assertIsNotNone(unallocated)
