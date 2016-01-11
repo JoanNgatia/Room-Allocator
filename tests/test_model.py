@@ -88,7 +88,7 @@ class TestRoomAllocation(unittest.TestCase):
         unallocated = self.amity.get_unallocated()
         print_unallocated = self.amity.print_unallocated_employees()
         self.assertIsNotNone(unallocated)
-        self.assertFalse(print_unallocated)
+        self.assertTrue(print_unallocated)
 
 
 if __name__ == '__main__':
