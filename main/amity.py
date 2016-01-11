@@ -107,3 +107,4 @@ class Amity(object):
         """print a list of employees that did not get space"""
         for employee in self.unallocated:
             print employee.name
+        return True
