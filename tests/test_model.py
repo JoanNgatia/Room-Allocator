@@ -19,7 +19,7 @@ office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
                 'Springfield', 'Krypton', 'Oculus', 'Narnia',
                 'Gotham', 'Nowhere']
 
-file_input = 'tests/sample.txt'
+file_input = 'data/sample.txt'
 
 employees_test = []
 
