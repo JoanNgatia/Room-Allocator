@@ -96,7 +96,6 @@ class Amity(object):
             for room_name in value:
                 print "{0}" .format(room_name)
                 print room_name.get_occupants()
-                print
         return True
 
     def get_unallocated(self):
