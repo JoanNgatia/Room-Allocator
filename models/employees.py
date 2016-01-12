@@ -9,6 +9,9 @@ class Employee(object):
         self.office = office
         return self.office
 
+    def has_office(self):
+        return True if self.office is not None else False
+
     def __repr__(self):
         return "{0}".format(self.name)
 
@@ -29,4 +32,5 @@ class Fellow(Employee):
 
 class Staff(Employee):
     """Staff inherits from the Employee class"""
-    pass
+    def has_living_space(self):
+        return False

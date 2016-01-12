@@ -19,7 +19,9 @@ office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
                 'Springfield', 'Krypton', 'Oculus', 'Narnia',
                 'Gotham', 'Nowhere']
 
-file_input = 'input.txt'
+file_input = 'tests/sample.txt'
+
+employees_test = []
 
 
 class TestModels(unittest.TestCase):
@@ -30,6 +32,7 @@ class TestModels(unittest.TestCase):
         self.livingspace = LivingSpace('Sapphire')
         self.fellow = Fellow('Joan Ngatia', True)
         self.staff = Staff('Anthony Nandaa')
+        self.amity.get_employee_details(file_input)
 
     def test_office_creation(self):
         """Test correct office instantiation"""
@@ -61,16 +64,12 @@ class TestRoomAllocation(unittest.TestCase):
         self.amity = Amity()
         self.amity.pre_populate_rooms(living_space_names, 'livingspace')
         self.amity.pre_populate_rooms(office_names, 'office')
+        self.amity.get_employee_details(file_input)
 
     def test_amity_prepopulation(self):
         """Test correct prepolation of Amity"""
         self.assertEquals(len(self.amity.room_list['livingspace']), 10)
         self.assertEquals(len(self.amity.room_list['office']), 10)
-
-    def test_employee_details_input(self):
-        """Test parsing input file"""
-        employees = self.amity.get_employee_details(file_input)
-        self.assertEquals(len(employees), 49)
 
     def test_allocations_list(self):
         """Test getting allocations list"""
@@ -80,6 +79,18 @@ class TestRoomAllocation(unittest.TestCase):
         print_allocations = self.amity.print_allocations()
         self.assertIsNotNone(allocations)
         self.assertTrue(print_allocations)
+
+        # Store employee instances for testing"""
+        self.staff = Staff("MARGARET GITAU")
+        self.fellow1 = Fellow("IVY NYAYIEKA", True)
+        self.fellow2 = Fellow("PAULIO NGATIA")
+        employees_test.append(self.staff)
+        employees_test.append(self.fellow1)
+        employees_test.append(self.fellow2)
+
+        """Test correct allocation to rooms"""
+        self.assertEquals(self.staff.has_living_space(), False)
+        self.assertEquals(self.fellow2.wants_housing, False)
 
     def test_unallocated_list(self):
         """Tests getting list of unallocated employees"""
