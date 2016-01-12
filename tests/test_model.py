@@ -72,12 +72,14 @@ class TestRoomAllocation(unittest.TestCase):
         self.assertEquals(len(self.amity.room_list['office']), 10)
 
     def test_allocations_list(self):
-        """Test getting allocations list"""
+        """Test getting allocations list as per sample file input"""
         self.amity.assign_officespace()
         self.amity.assign_livingspace()
         allocations = self.amity.get_allocations_list()
         print_allocations = self.amity.print_allocations()
         self.assertIsNotNone(allocations)
+        self.assertEqual(len(allocations['office']), 7)
+        self.assertEqual(len(allocations['livingspace']), 4)
         self.assertTrue(print_allocations)
 
         # Store employee instances for testing"""
@@ -89,8 +91,11 @@ class TestRoomAllocation(unittest.TestCase):
         employees_test.append(self.fellow2)
 
         """Test correct allocation to rooms"""
-        self.assertEquals(self.staff.has_living_space(), False)
-        self.assertEquals(self.fellow2.wants_housing, False)
+        livingspaces_occupied = allocations['livingspace']
+        for room in livingspaces_occupied:
+            occupants = room.get_occupants()
+        self.assertFalse(self.fellow2 in occupants)
+        self.assertFalse(self.staff in occupants)
 
     def test_unallocated_list(self):
         """Tests getting list of unallocated employees"""
@@ -98,7 +103,7 @@ class TestRoomAllocation(unittest.TestCase):
         self.amity.assign_livingspace()
         unallocated = self.amity.get_unallocated()
         print_unallocated = self.amity.print_unallocated_employees()
-        self.assertIsNotNone(unallocated)
+        self.assertEqual(len(unallocated), 0)
         self.assertTrue(print_unallocated)
 
 

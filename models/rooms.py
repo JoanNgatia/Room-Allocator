@@ -10,7 +10,7 @@ class Room(object):
 
     def get_occupants(self):
         """Gives the list of current occupiers of a room"""
-        print self.occupants
+        return self.occupants
 
     def current_number(self):
         """Checks for current occupancy of a room"""

@@ -32,5 +32,4 @@ class Fellow(Employee):
 
 class Staff(Employee):
     """Staff inherits from the Employee class"""
-    def has_living_space(self):
-        return False
+    pass
