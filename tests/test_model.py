@@ -74,22 +74,21 @@ class TestRoomAllocation(unittest.TestCase):
         self.amity.assign_officespace()
         self.amity.assign_livingspace()
         allocations = self.amity.get_allocations_list()
-        print_allocations = self.amity.print_allocations()
         self.assertIsNotNone(allocations)
         self.assertEqual(len(allocations['office']), 7)
         self.assertEqual(len(allocations['livingspace']), 4)
-        self.assertTrue(print_allocations)
 
         # Store employee instances for testing"""
-        self.staff = Staff("MARGARET GITAU")
-        self.fellow1 = Fellow("IVY NYAYIEKA", True)
+        self.staff = Staff("NYAMBURA KIHORO")
+        self.fellow1 = Fellow("ALEX MWALEH", True)
         self.fellow2 = Fellow("PAULIO NGATIA")
 
         """Test correct allocation to rooms"""
         livingspaces_occupied = allocations['livingspace']
+        occupants = []
         for room in livingspaces_occupied:
-            occupants = room.get_occupants()
-        self.assertFalse(self.fellow2 in occupants)
+            occupants += room.get_occupants()
+        self.assertTrue(self.fellow1 in occupants)
         self.assertFalse(self.staff in occupants)
 
     def test_unallocated_list(self):
@@ -97,9 +96,7 @@ class TestRoomAllocation(unittest.TestCase):
         self.amity.assign_officespace()
         self.amity.assign_livingspace()
         unallocated = self.amity.get_unallocated()
-        print_unallocated = self.amity.print_unallocated_employees()
         self.assertEqual(len(unallocated), 0)
-        self.assertTrue(print_unallocated)
 
 
 if __name__ == '__main__':

@@ -15,6 +15,9 @@ class Employee(object):
     def __repr__(self):
         return "{0}".format(self.name)
 
+    def __eq__(self, obj):
+        return self.name == obj.name and self.__class__ == obj.__class__
+
 
 class Fellow(Employee):
     """Fellow inherits from Employee class
