@@ -3,7 +3,7 @@
 
 #Sys generated files
 *office_allocation.txt
-*rooms_allocated.txt
+*livingrooms_allocation.txt
 
 *.coverage
 *htmlcov/

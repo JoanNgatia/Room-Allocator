@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/andela-jngatia/Room-Allocator.svg?branch=develop)](https://travis-ci.org/andela-jngatia/Room-Allocator)
+[![Coverage Status](https://coveralls.io/repos/andela-jngatia/Room-Allocator/badge.svg?branch=master&service=github)](https://coveralls.io/github/andela-jngatia/Room-Allocator?branch=develop)
 # Room-Allocator
 
 ##Description
@@ -13,7 +14,8 @@ This is a system to allocate offices and living spaces to employees at Amity.
 		`python manage.py <inputfile>`.
 4. To view the allocations, 
 	open `office_allocation.txt` for office allocation or 
-	`rooms_allocated.txt` for living spaces allocated.
+	`livingrooms_allocation.txt` for living spaces allocated.
+    The allocations will  also be printed to the console.
 
 ##Running tests
 1.	Navigate to project directory.

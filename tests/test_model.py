@@ -19,7 +19,7 @@ office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
                 'Springfield', 'Krypton', 'Oculus', 'Narnia',
                 'Gotham', 'Nowhere']
 
-file_input = 'input.txt'
+file_input = 'data/sample.txt'
 
 
 class TestModels(unittest.TestCase):
@@ -30,6 +30,7 @@ class TestModels(unittest.TestCase):
         self.livingspace = LivingSpace('Sapphire')
         self.fellow = Fellow('Joan Ngatia', True)
         self.staff = Staff('Anthony Nandaa')
+        self.amity.get_employee_details(file_input)
 
     def test_office_creation(self):
         """Test correct office instantiation"""
@@ -61,34 +62,41 @@ class TestRoomAllocation(unittest.TestCase):
         self.amity = Amity()
         self.amity.pre_populate_rooms(living_space_names, 'livingspace')
         self.amity.pre_populate_rooms(office_names, 'office')
+        self.amity.get_employee_details(file_input)
 
     def test_amity_prepopulation(self):
         """Test correct prepolation of Amity"""
         self.assertEquals(len(self.amity.room_list['livingspace']), 10)
         self.assertEquals(len(self.amity.room_list['office']), 10)
 
-    def test_employee_details_input(self):
-        """Test parsing input file"""
-        employees = self.amity.get_employee_details(file_input)
-        self.assertEquals(len(employees), 49)
-
     def test_allocations_list(self):
-        """Test getting allocations list"""
-        self.amity.assign_officespace(file_input)
-        self.amity.assign_livingspace(file_input)
+        """Test getting allocations list as per sample file input"""
+        self.amity.assign_officespace()
+        self.amity.assign_livingspace()
         allocations = self.amity.get_allocations_list()
-        print_allocations = self.amity.print_allocations()
         self.assertIsNotNone(allocations)
-        self.assertTrue(print_allocations)
+        self.assertEqual(len(allocations['office']), 7)
+        self.assertEqual(len(allocations['livingspace']), 4)
+
+        # Store employee instances for testing"""
+        self.staff = Staff("NYAMBURA KIHORO")
+        self.fellow1 = Fellow("ALEX MWALEH", True)
+        self.fellow2 = Fellow("PAULIO NGATIA")
+
+        """Test correct allocation to rooms"""
+        livingspaces_occupied = allocations['livingspace']
+        occupants = []
+        for room in livingspaces_occupied:
+            occupants += room.get_occupants()
+        self.assertTrue(self.fellow1 in occupants)
+        self.assertFalse(self.staff in occupants)
 
     def test_unallocated_list(self):
         """Tests getting list of unallocated employees"""
-        self.amity.assign_officespace(file_input)
-        self.amity.assign_livingspace(file_input)
+        self.amity.assign_officespace()
+        self.amity.assign_livingspace()
         unallocated = self.amity.get_unallocated()
-        print_unallocated = self.amity.print_unallocated_employees()
-        self.assertIsNotNone(unallocated)
-        self.assertFalse(print_unallocated)
+        self.assertEqual(len(unallocated), 0)
 
 
 if __name__ == '__main__':
