@@ -21,8 +21,6 @@ office_names = ['Hogwarts', 'Valhalla', 'Roundtable', 'Quahog',
 
 file_input = 'data/sample.txt'
 
-employees_test = []
-
 
 class TestModels(unittest.TestCase):
     """Test models created"""
@@ -86,9 +84,6 @@ class TestRoomAllocation(unittest.TestCase):
         self.staff = Staff("MARGARET GITAU")
         self.fellow1 = Fellow("IVY NYAYIEKA", True)
         self.fellow2 = Fellow("PAULIO NGATIA")
-        employees_test.append(self.staff)
-        employees_test.append(self.fellow1)
-        employees_test.append(self.fellow2)
 
         """Test correct allocation to rooms"""
         livingspaces_occupied = allocations['livingspace']
