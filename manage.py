@@ -31,11 +31,6 @@ if file_name:
     amity.get_allocations_list()
     amity.print_allocations()
 
-    # return list of members of a given room
-    # allocation_result = amity.get_allocations_list()
-    # print allocation_result['office'][1]
-    # print allocation_result['office'][1].get_occupants()
-
     # return a list of unallocated persons
     amity.get_unallocated()
     amity.print_unallocated_employees()
