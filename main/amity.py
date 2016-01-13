@@ -96,7 +96,6 @@ class Amity(object):
             for room_name in value:
                 print "{0}" .format(room_name)
                 print room_name.get_occupants()
-        return True
 
     def get_unallocated(self):
         """Return a list of unallocated employees"""
@@ -106,4 +105,3 @@ class Amity(object):
         """Print a list of employees that did not get space"""
         for employee in self.unallocated:
             print employee.name
-        return True

@@ -5,3 +5,4 @@ omit =
     *__init__*
     */lib/python/*
     *__repr__*
+    *__eq__*

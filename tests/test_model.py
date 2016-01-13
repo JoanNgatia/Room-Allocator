@@ -83,13 +83,14 @@ class TestRoomAllocation(unittest.TestCase):
         self.fellow1 = Fellow("ALEX MWALEH", True)
         self.fellow2 = Fellow("PAULIO NGATIA")
 
-        """Test correct allocation to rooms"""
+        # Test correct allocation to rooms"""
         livingspaces_occupied = allocations['livingspace']
         occupants = []
         for room in livingspaces_occupied:
             occupants += room.get_occupants()
         self.assertTrue(self.fellow1 in occupants)
         self.assertFalse(self.staff in occupants)
+        self.assertFalse(self.fellow2 in occupants)
 
     def test_unallocated_list(self):
         """Tests getting list of unallocated employees"""
