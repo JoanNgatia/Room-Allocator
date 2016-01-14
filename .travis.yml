@@ -7,6 +7,7 @@ install:
   - "pip install --upgrade pip"
   - "pip install python-coveralls"
   - "pip install coverage"
+  - "py.test tests/test_model.py"
   - "pip install -r requirements.txt"
 
 virtualenv:
@@ -16,6 +17,7 @@ before_install:
   SITE_PKG_DIR=$VIRTUAL_ENV/lib/python$TRAVIS_PYTHON_VERSION/site-packages rm -f $VIRTUAL_ENV/lib/python$TRAVIS_PYTHON_VERSION/no-global-site-packages.txt  
 # command to run tests
 script: 
+  - py.test coveralls/test_model.py --doctest-modules --pep8 coveralls -v --cov coveralls --cov-report term-missing
   - nosetests --with-coverage
 
 after-success:
