@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.org/andela-jngatia/Room-Allocator.svg?branch=develop)](https://travis-ci.org/andela-jngatia/Room-Allocator)
 
+
+[![Coverage Status](https://coveralls.io/repos/andela-jngatia/Room-Allocator/badge.svg?branch=develop&service=github)](https://coveralls.io/github/andela-jngatia/Room-Allocator?branch=develop)
+
 # Room-Allocator
 
 ##Description
